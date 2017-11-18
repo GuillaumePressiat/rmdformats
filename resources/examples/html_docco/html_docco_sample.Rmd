@@ -4,7 +4,7 @@ output:
   rmdformats::html_docco:
     fig_width: 6
     fig_height: 6
-    highlight: kate
+    highlight: tango
     thumbnails: true
     lightbox: true
     gallery: true

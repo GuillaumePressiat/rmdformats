@@ -2,8 +2,6 @@
 
 body {
     font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
-    color:#404040;
-    font-weight:light;
 }
 
 /* Titles */
@@ -232,38 +230,7 @@ img.mfp-img {
     margin-top: 1em;
 }
 
-/* Nav pills */
 
-#main .nav-pills {
-    margin-top: 20px;
-    margin-bottom: 10px;
-}
-
-#main .nav-pills > li > a {
-    background-color: #EEEEEE;
-    background-image: none;
-    background-position: 0 0;
-}
-
-#main .nav-pills > li > a:hover {
-  color: #FFFFFF !important;
-  background-color: #333399;
-}
-
-#main .nav-pills > li.active > a,
-#main .nav-pills > li.active > a:hover,
-#main .nav-pills > li.active > a:focus {
-  color: #FFFFFF !important;
-  background-color:#333399;
-}
-
-/* Chi-squared results */
-
-.chisq-results {
-    margin: -20px 0px 35px 20px;
-    font-size: 90%;
-    font-style: italic;
-}
 code {
 	color: #a0522d;
 }

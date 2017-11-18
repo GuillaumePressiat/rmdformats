@@ -4,27 +4,31 @@ output:
   rmdformats::html_clean:
     fig_width: 6
     fig_height: 6
-    highlight: kate
+    highlight: tango
     thumbnails: true
     lightbox: true
     gallery: true
+    mathjax: false
 ---
 
 
 ```{r knitr_init, echo=FALSE, results="asis", cache=FALSE}
-library(knitr)
-library(rmdformats)
 
 ## Global options
 options(max.print = "75")
-opts_chunk$set(echo = FALSE,
+knitr::opts_chunk$set(echo = FALSE,
 	             cache = FALSE,
                prompt = FALSE,
                tidy = FALSE,
                comment = NA,
                message = FALSE,
                warning = FALSE)
-opts_knit$set(width = 75)
+knitr::opts_knit$set(width = 75)
+```
+
+```{r}
+library(knitr)
+library(rmdformats)
 ```
 
 # Code and tables
@@ -99,8 +103,23 @@ And a wonderful scatterplot, with a caption.
 ggplot(data=iris) + geom_point(aes(x=Petal.Width, y=Petal.Length, color=Species))
 ```
 
-# Mathjax
+# Dynamic toc with for loop
 
-And finally, an incredibly complex equation :
 
-$$ y = \sqrt{\frac{1}{x}} $$
+```{r , results = 'asis', echo = TRUE}
+
+themes <- list(theme_bw(), theme_classic(), theme_dark(), theme_minimal())
+nthemes <- c('Black and white : `theme_bw`', 
+             'Classic : `theme_classic`', 
+             'Dark : `theme_dark`', 
+             'Minimal `theme_minimal`')
+
+for (i in 1:4){
+  cat(paste0('\n\n## Chapter n°', i, '\n\n'))
+  cat(paste0('\n\n### ggplot theme ', nthemes[i], '\n\n'))
+  print(ggplot(data=iris) + 
+          geom_point(aes(x=Petal.Width, y=Petal.Length, color=Species)) + 
+          themes[i])
+}
+```
+

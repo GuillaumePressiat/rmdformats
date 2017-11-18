@@ -1,31 +1,36 @@
 ---
 title: "`readthedown` template example"
 date: "`r Sys.Date()`"
-author: juba
+author: Gpr
 output:
   rmdformats::readthedown:
     code_folding: hide
     self_contained: true
     thumbnails: false
-    lightbox: false
+    lightbox: true
+    highlight: tango
 ---
 
 
 ```{r knitr_init, echo=FALSE, results="asis", cache=FALSE}
-library(knitr)
-library(rmdformats)
-library(DT)
 
 ## Global options
 options(max.print = "75")
-opts_chunk$set(echo = FALSE,
+knitr::opts_chunk$set(echo = FALSE,
 	             cache = FALSE,
                prompt = FALSE,
                tidy = FALSE,
                comment = NA,
                message = FALSE,
                warning = FALSE)
-opts_knit$set(width = 75)
+knitr::opts_knit$set(width = 75)
+
+```
+
+```{r}
+library(knitr)
+library(rmdformats)
+library(DT)
 ```
 
 # Code and tables
@@ -57,7 +62,7 @@ tab <- iris %>%
 Here is the structure of the `iris` dataset.
 
 ```{r iris_str, echo=TRUE}
-str(iris)
+glimpse(iris)
 ```
 
 And blockquote :
@@ -114,8 +119,27 @@ ggplot(data=iris) +
 
 And a wonderful scatterplot, with a caption.
 
-```{r iris_scatter1, fig.cap="This is a caption"}
+```{r iris_scatter1}
 ggplot(data=iris) + geom_point(aes(x=Petal.Width, y=Petal.Length, color=Species))
 ```
 
+# Dynamic toc with for loop
+
+
+```{r , results = 'asis', echo = TRUE}
+
+themes <- list(theme_bw(), theme_classic(), theme_dark(), theme_minimal())
+nthemes <- c('Black and white : `theme_bw`', 
+             'Classic : `theme_classic`', 
+             'Dark : `theme_dark`', 
+             'Minimal `theme_minimal`')
+
+for (i in 1:4){
+  cat(paste0('\n\n## Chapter n°', i, '\n\n'))
+  cat(paste0('\n\n### ggplot theme ', nthemes[i], '\n\n'))
+  print(ggplot(data=iris) + 
+          geom_point(aes(x=Petal.Width, y=Petal.Length, color=Species)) + 
+          themes[i])
+}
+```
 

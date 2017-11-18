@@ -2,7 +2,7 @@
 title: "Sample document"
 output:
   rmdformats::material:
-    highlight: kate
+    highlight: tango
     self_contained: true
     code_folding: show
     thumbnails: true
