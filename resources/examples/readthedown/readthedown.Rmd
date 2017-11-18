@@ -5,10 +5,11 @@ author: Gpr
 output:
   rmdformats::readthedown:
     code_folding: hide
-    self_contained: true
+    self_contained: false
     thumbnails: false
     lightbox: true
     highlight: tango
+    toc_depth: 3
 ---
 
 
@@ -106,40 +107,57 @@ An incredibly complex equation :
 $$ y = \sqrt{\frac{1}{x}} $$
 
 
-# Figures
-
-Here is an histogram.
-
-```{r iris_hist}
-ggplot(data=iris) +
-    geom_histogram(aes(x=Petal.Width)) +
-    facet_grid(Species~.)
-
-```
-
-And a wonderful scatterplot, with a caption.
-
-```{r iris_scatter1}
-ggplot(data=iris) + geom_point(aes(x=Petal.Width, y=Petal.Length, color=Species))
-```
 
 # Dynamic toc with for loop
 
+We present different themes for `ggplot` here with a `for` loop.
 
 ```{r , results = 'asis', echo = TRUE}
+library(ggplot2)
+library(ggthemes)
+library(hrbrthemes)
 
-themes <- list(theme_bw(), theme_classic(), theme_dark(), theme_minimal())
-nthemes <- c('Black and white : `theme_bw`', 
-             'Classic : `theme_classic`', 
-             'Dark : `theme_dark`', 
-             'Minimal `theme_minimal`')
+ggplot_themes <- list("Black and white"    = theme_bw(), 
+                      "Classic"            = theme_classic(), 
+                      "Dark"               = theme_dark(), 
+                      "Minimal"            = theme_minimal(),
+                      "Map"                = theme_map(),
+                      "Light"              = theme_light(),
+                      "Void"               = theme_void())
 
-for (i in 1:4){
-  cat(paste0('\n\n## Chapter n°', i, '\n\n'))
-  cat(paste0('\n\n### ggplot theme ', nthemes[i], '\n\n'))
-  print(ggplot(data=iris) + 
-          geom_point(aes(x=Petal.Width, y=Petal.Length, color=Species)) + 
-          themes[i])
+ggthemes <- list("Calc"                    = theme_calc(),
+                 "Economist"               = theme_economist(),
+                 "Economist white"         = theme_economist_white(),
+                 "Excel"                   = theme_excel(),
+                 "Few"                     = theme_few(),
+                 "Five Thirty Eight"       = theme_fivethirtyeight(),
+                 "G. Docs"                 = theme_gdocs(),
+                 "High Chart"              = theme_hc(),
+                 "Inverse gray"            = theme_igray(),
+                 "Linedraw"                = theme_linedraw(),
+                 "Pander"                  = theme_pander(),
+                 "Solarized"               = theme_solarized(),
+                 "Solarized 2"             = theme_solarized_2(),
+                 "Solid"                   = theme_solid(),
+                 "Stata"                   = theme_stata(),
+                 "Tufte"                   = theme_tufte(),
+                 "Wall Street Journal"     = theme_wsj())
+
+hrbrthemes <- list("Ipsum (Arial Narrow)"  = theme_ipsum())
+
+themes <- list("ggplot2"    = ggplot_themes, 
+               "ggthemes"   = ggthemes,
+               "hrbrthemes" = hrbrthemes)
+
+for (j in seq_along(themes)){
+  cat(paste0('\n\n## ', names(themes[j]), ' themes \n\n'))
+  for (i in seq_along(themes[[j]])){
+    cat(paste0('\n\n### ', names(themes[[j]][i]), '\n\n'))
+    print(ggplot(data=iris) + 
+            geom_point(aes(x=Petal.Width, y=Petal.Length, color=Species)) + 
+            themes[[j]][i] + 
+      ggtitle(names(themes[[j]][i])))
+  }
 }
 ```
 
