@@ -37,7 +37,7 @@ readthedown <- function(fig_width = 8,
                        thumbnails = FALSE,
                        gallery = FALSE,
                        pandoc_args = NULL,
-                       toc_depth = 2,
+                       toc_depth = 3,
                        mathjax = "rmdformats",
                        use_bookdown = FALSE,
                        ...) {

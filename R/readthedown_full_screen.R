@@ -37,7 +37,7 @@ readthedown_full_screen <- function(fig_width = 8,
                        thumbnails = FALSE,
                        gallery = FALSE,
                        pandoc_args = NULL,
-                       toc_depth = 2,
+                       toc_depth = 3,
                        mathjax = "rmdformats",
                        use_bookdown = FALSE,
                        ...) {
@@ -48,7 +48,7 @@ readthedown_full_screen <- function(fig_width = 8,
                              html_dependency_navigation(),                             
                              html_dependency_bootstrap(),
                              html_dependency_magnific_popup(),
-                             html_dependency_readthedown())
+                             html_dependency_readthedown_full_screen())
 
   ## Force mathjax arguments
   if (!is.null(mathjax)) {
@@ -96,7 +96,7 @@ readthedown_full_screen <- function(fig_width = 8,
 }
 
 # readthedown js and css
-html_dependency_readthedown <- function() {
+html_dependency_readthedown_full_screen <- function() {
   htmltools::htmlDependency(name = "readthedown_full_screen",
                  version = "0.1",
                  src = system.file("templates/readthedown_full_screen", package = "rmdformats"),
