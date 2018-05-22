@@ -3,7 +3,7 @@ title: ""
 date: "`r Sys.Date()`"
 output:
   rmdformats::readthedown_full_screen:
-    highlight: taggo
+    highlight: tango
 ---
 
 
